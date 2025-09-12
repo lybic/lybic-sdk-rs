@@ -7,10 +7,6 @@ pub struct ComputerUseParseTextRequestDto {
 
 impl ComputerUseParseTextRequestDto {
     pub fn new(text_content: String) -> ComputerUseParseTextRequestDto {
-        ComputerUseParseTextRequestDto {
-            text_content,
-        }
+        ComputerUseParseTextRequestDto { text_content }
     }
 }
-
-

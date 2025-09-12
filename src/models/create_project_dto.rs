@@ -7,10 +7,6 @@ pub struct CreateProjectDto {
 
 impl CreateProjectDto {
     pub fn new(name: String) -> CreateProjectDto {
-        CreateProjectDto {
-            name,
-        }
+        CreateProjectDto { name }
     }
 }
-
-

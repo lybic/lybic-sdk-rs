@@ -1,9 +1,9 @@
-use std::collections::HashMap;
-use super::{configuration, Error};
+use super::{Error, configuration};
 use http_body_util::{BodyExt, Full};
 use hyper::body::Bytes;
 use hyper_util::client::legacy::connect::Connect;
 use serde::Serialize;
+use std::collections::HashMap;
 
 pub(crate) struct ApiKey {
     pub in_header: bool,
@@ -90,31 +90,32 @@ impl Request {
         self
     }
 
-    pub async fn execute<C, U>(self, conf: &configuration::Configuration<C>) -> Result<U, Error<serde_json::Value>>
+    pub async fn execute<C, U>(
+        self,
+        conf: &configuration::Configuration<C>,
+    ) -> Result<U, Error<serde_json::Value>>
     where
         C: Connect + Clone + Send + Sync + 'static,
         U: Sized + Default, // 添加 Default 约束
         for<'de> U: serde::Deserialize<'de>,
     {
-        let mut query_string = url::form_urlencoded::Serializer::new("".to_owned());
-
         let mut path = self.path;
         for (k, v) in self.path_params {
             path = path.replace(&format!("{{{}}}", k), &v);
         }
 
-        for (key, val) in self.query_params {
-            query_string.append_pair(&key, &val);
-        }
-
-        let mut uri_str = format!("{}{}", conf.base_path, path);
-        let query_string_str = query_string.finish();
-        if !query_string_str.is_empty() {
-            uri_str.push('?');
-            uri_str.push_str(&query_string_str);
-        }
-
-        let uri: http::Uri = uri_str.parse().map_err(Error::from)?;
+        let uri: http::Uri = format!(
+            "{}{}?={}",
+            conf.base_path,
+            path,
+            self.query_params
+                .iter()
+                .map(|(k, v)| format!("{k}={v}"))
+                .collect::<Vec<_>>()
+                .join("&")
+        )
+        .parse()
+        .map_err(Error::from)?;
 
         let mut req_builder = http::Request::builder().method(self.method).uri(uri);
 
@@ -126,7 +127,10 @@ impl Request {
             // Add headers from request builder
             for (key, value) in self.header_params {
                 if let Ok(header_value) = http::header::HeaderValue::from_str(&value) {
-                    headers.insert(http::header::HeaderName::from_bytes(key.as_bytes()).unwrap(), header_value);
+                    headers.insert(
+                        http::header::HeaderName::from_bytes(key.as_bytes()).unwrap(),
+                        header_value,
+                    );
                 }
             }
 
@@ -136,15 +140,28 @@ impl Request {
                     if let Some(ref key) = conf.api_key {
                         let val = apikey.key(&key.prefix, &key.key);
                         if apikey.in_header {
-                             if let Ok(header_value) = http::header::HeaderValue::from_str(&val) {
-                                headers.insert(http::header::HeaderName::from_bytes(apikey.param_name.as_bytes()).unwrap(), header_value);
+                            if let Ok(header_value) = http::header::HeaderValue::from_str(&val) {
+                                headers.insert(
+                                    http::header::HeaderName::from_bytes(
+                                        apikey.param_name.as_bytes(),
+                                    )
+                                    .unwrap(),
+                                    header_value,
+                                );
                             }
                         }
                     }
                 }
                 Auth::Basic => {
                     if let Some(ref auth_conf) = conf.basic_auth {
-                        let value = format!("Basic {}", base64::encode(format!("{}:{}", auth_conf.0, auth_conf.1.as_deref().unwrap_or(""))));
+                        let value = format!(
+                            "Basic {}",
+                            base64::encode(format!(
+                                "{}:{}",
+                                auth_conf.0,
+                                auth_conf.1.as_deref().unwrap_or("")
+                            ))
+                        );
                         if let Ok(header_value) = http::header::HeaderValue::from_str(&value) {
                             headers.insert(http::header::AUTHORIZATION, header_value);
                         }
@@ -170,7 +187,10 @@ impl Request {
 
         let body = if !self.form_params.is_empty() {
             if let Some(headers) = req_builder.headers_mut() {
-                headers.insert(http::header::CONTENT_TYPE, http::header::HeaderValue::from_static("application/x-www-form-urlencoded"));
+                headers.insert(
+                    http::header::CONTENT_TYPE,
+                    http::header::HeaderValue::from_static("application/x-www-form-urlencoded"),
+                );
             }
             let mut enc = url::form_urlencoded::Serializer::new("".to_owned());
             for (k, v) in self.form_params {
@@ -179,7 +199,10 @@ impl Request {
             Full::new(Bytes::from(enc.finish()))
         } else if let Some(body) = self.serialized_body {
             if let Some(headers) = req_builder.headers_mut() {
-                headers.insert(http::header::CONTENT_TYPE, http::header::HeaderValue::from_static("application/json"));
+                headers.insert(
+                    http::header::CONTENT_TYPE,
+                    http::header::HeaderValue::from_static("application/json"),
+                );
             }
             Full::new(Bytes::from(body))
         } else {
@@ -198,10 +221,10 @@ impl Request {
             return Err(Error::from((status, &*body_bytes)));
         }
 
-        if self.no_return_type {
-            Ok(U::default())
+        Ok(if self.no_return_type {
+            U::default()
         } else {
             serde_json::from_slice(&body_bytes)?
-        }
+        })
     }
 }

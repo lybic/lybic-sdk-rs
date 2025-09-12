@@ -1,4 +1,4 @@
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct StatsResponseDto {
     /// Number of MCP servers
     #[serde(rename = "mcpServers")]
@@ -20,5 +20,3 @@ impl StatsResponseDto {
         }
     }
 }
-
-

@@ -1,5 +1,5 @@
-use serde::{Serialize, Deserialize};
 use super::length::Length;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "type")]

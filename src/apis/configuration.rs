@@ -1,9 +1,9 @@
 use http::header::{HeaderMap, HeaderValue};
-use hyper_util::client::legacy::connect::Connect;
-use hyper_util::client::legacy::Client;
-use std::env;
 use http_body_util::Full;
 use hyper::body::Bytes;
+use hyper_util::client::legacy::Client;
+use hyper_util::client::legacy::connect::Connect;
+use std::env;
 
 pub struct Configuration<C: Connect> {
     pub base_path: String,

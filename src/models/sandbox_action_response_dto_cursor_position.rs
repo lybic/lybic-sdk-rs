@@ -18,7 +18,13 @@ pub struct SandboxActionResponseDtoCursorPosition {
 }
 
 impl SandboxActionResponseDtoCursorPosition {
-    pub fn new(x: f32, y: f32, screen_width: f32, screen_height: f32, screen_index: f32) -> SandboxActionResponseDtoCursorPosition {
+    pub fn new(
+        x: f32,
+        y: f32,
+        screen_width: f32,
+        screen_height: f32,
+        screen_index: f32,
+    ) -> SandboxActionResponseDtoCursorPosition {
         SandboxActionResponseDtoCursorPosition {
             x,
             y,
@@ -28,5 +34,3 @@ impl SandboxActionResponseDtoCursorPosition {
         }
     }
 }
-
-

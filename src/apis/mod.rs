@@ -81,5 +81,5 @@ pub use self::project_api::{ProjectApi, ProjectApiClient};
 mod sandbox_api;
 pub use self::sandbox_api::{SandboxApi, SandboxApiClient};
 
-pub mod configuration;
 pub mod client;
+pub mod configuration;

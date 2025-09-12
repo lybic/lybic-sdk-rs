@@ -7,10 +7,6 @@ pub struct SetMcpServerToSandboxResponseDto {
 
 impl SetMcpServerToSandboxResponseDto {
     pub fn new(sandbox_id: Option<String>) -> SetMcpServerToSandboxResponseDto {
-        SetMcpServerToSandboxResponseDto {
-            sandbox_id,
-        }
+        SetMcpServerToSandboxResponseDto { sandbox_id }
     }
 }
-
-

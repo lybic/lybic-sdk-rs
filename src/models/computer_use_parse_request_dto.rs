@@ -27,4 +27,3 @@ pub enum Model {
     #[serde(rename = "oai-compute-use")]
     OaiComputeUse,
 }
-

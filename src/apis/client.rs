@@ -1,13 +1,12 @@
-use std::sync::Arc;
 use super::configuration::Configuration;
 use hyper_util::client::legacy::connect::Connect;
-
+use std::sync::Arc;
 
 // #[cfg(feature = "default-client")]
 // pub fn new() -> LybicClient {
 //     use hyper_util::client::legacy::Client;
 //     use hyper_util::rt::TokioExecutor;
-// 
+//
 //     let https = hyper_tls::HttpsConnector::new();
 //     let client = Client::builder(TokioExecutor::new()).build(https);
 //     let config = Configuration::new(client);

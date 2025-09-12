@@ -1,4 +1,4 @@
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetSandboxResponseDto {
     #[serde(rename = "sandbox")]
     pub sandbox: crate::models::GetSandboxResponseDtoSandbox,
@@ -7,12 +7,13 @@ pub struct GetSandboxResponseDto {
 }
 
 impl GetSandboxResponseDto {
-    pub fn new(sandbox: crate::models::GetSandboxResponseDtoSandbox, connect_details: crate::models::GetSandboxResponseDtoConnectDetails) -> GetSandboxResponseDto {
+    pub fn new(
+        sandbox: crate::models::GetSandboxResponseDtoSandbox,
+        connect_details: crate::models::GetSandboxResponseDtoConnectDetails,
+    ) -> GetSandboxResponseDto {
         GetSandboxResponseDto {
             sandbox,
             connect_details,
         }
     }
 }
-
-

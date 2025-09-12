@@ -36,7 +36,7 @@ pub mod set_mcp_server_to_sandbox_response_dto;
 pub use self::set_mcp_server_to_sandbox_response_dto::SetMcpServerToSandboxResponseDto;
 pub mod single_project_response_dto;
 pub use self::single_project_response_dto::SingleProjectResponseDto;
-pub mod stats_response_dto;
 mod length;
+pub mod stats_response_dto;
 
 pub use self::stats_response_dto::StatsResponseDto;

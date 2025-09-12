@@ -1,4 +1,4 @@
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetSandboxResponseDtoSandbox {
     #[serde(rename = "id")]
     pub id: String,
@@ -16,7 +16,14 @@ pub struct GetSandboxResponseDtoSandbox {
 }
 
 impl GetSandboxResponseDtoSandbox {
-    pub fn new(id: String, name: String, expired_at: String, expires_at: String, created_at: String, project_id: String) -> GetSandboxResponseDtoSandbox {
+    pub fn new(
+        id: String,
+        name: String,
+        expired_at: String,
+        expires_at: String,
+        created_at: String,
+        project_id: String,
+    ) -> GetSandboxResponseDtoSandbox {
         GetSandboxResponseDtoSandbox {
             id,
             name,
@@ -27,5 +34,3 @@ impl GetSandboxResponseDtoSandbox {
         }
     }
 }
-
-

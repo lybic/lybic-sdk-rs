@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// Represents a length which can be pixel-based or fractional.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
@@ -6,13 +6,8 @@ use serde::{Serialize, Deserialize};
 pub enum Length {
     /// Pixel-based length.
     #[serde(rename = "px")]
-    Pixel {
-        value: i32,
-    },
+    Pixel { value: i32 },
     /// Fractional length.
     #[serde(rename = "/")]
-    Fractional {
-        numerator: i32,
-        denominator: i32,
-    },
+    Fractional { numerator: i32, denominator: i32 },
 }

@@ -13,7 +13,13 @@ pub struct GetSandboxResponseDtoConnectDetailsGatewayAddresses {
 }
 
 impl GetSandboxResponseDtoConnectDetailsGatewayAddresses {
-    pub fn new(address: String, port: f32, name: String, preferred_providers: PreferredProviders, gateway_type: GatewayType) -> GetSandboxResponseDtoConnectDetailsGatewayAddresses {
+    pub fn new(
+        address: String,
+        port: f32,
+        name: String,
+        preferred_providers: PreferredProviders,
+        gateway_type: GatewayType,
+    ) -> GetSandboxResponseDtoConnectDetailsGatewayAddresses {
         GetSandboxResponseDtoConnectDetailsGatewayAddresses {
             address,
             port,
@@ -24,7 +30,7 @@ impl GetSandboxResponseDtoConnectDetailsGatewayAddresses {
     }
 }
 
-/// 
+///
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum PreferredProviders {
     #[serde(rename = "CHINA_TELECOM")]
@@ -44,7 +50,7 @@ pub enum PreferredProviders {
     #[serde(rename = "4")]
     _4,
 }
-/// 
+///
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum GatewayType {
     #[serde(rename = "KCP")]
@@ -60,4 +66,3 @@ pub enum GatewayType {
     #[serde(rename = "6")]
     _6,
 }
-

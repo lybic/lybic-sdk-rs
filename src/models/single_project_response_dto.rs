@@ -1,4 +1,4 @@
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct SingleProjectResponseDto {
     #[serde(rename = "id")]
     pub id: String,
@@ -11,7 +11,12 @@ pub struct SingleProjectResponseDto {
 }
 
 impl SingleProjectResponseDto {
-    pub fn new(id: String, name: String, created_at: String, default_project: bool) -> SingleProjectResponseDto {
+    pub fn new(
+        id: String,
+        name: String,
+        created_at: String,
+        default_project: bool,
+    ) -> SingleProjectResponseDto {
         SingleProjectResponseDto {
             id,
             name,
@@ -20,5 +25,3 @@ impl SingleProjectResponseDto {
         }
     }
 }
-
-
