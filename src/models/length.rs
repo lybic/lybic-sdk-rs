@@ -1,4 +1,3 @@
-use serde::{Deserialize, Serialize};
 
 /// Represents a length which can be pixel-based or fractional.
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]

@@ -24,8 +24,6 @@ impl ApiKey {
 pub(crate) enum Auth {
     None,
     ApiKey(ApiKey),
-    Basic,
-    Oauth,
 }
 
 pub(crate) struct Request {
@@ -149,29 +147,6 @@ impl Request {
                                     header_value,
                                 );
                             }
-                        }
-                    }
-                }
-                Auth::Basic => {
-                    if let Some(ref auth_conf) = conf.basic_auth {
-                        let value = format!(
-                            "Basic {}",
-                            base64::encode(format!(
-                                "{}:{}",
-                                auth_conf.0,
-                                auth_conf.1.as_deref().unwrap_or("")
-                            ))
-                        );
-                        if let Ok(header_value) = http::header::HeaderValue::from_str(&value) {
-                            headers.insert(http::header::AUTHORIZATION, header_value);
-                        }
-                    }
-                }
-                Auth::Oauth => {
-                    if let Some(ref token) = conf.oauth_access_token {
-                        let value = format!("Bearer {}", token);
-                        if let Ok(header_value) = http::header::HeaderValue::from_str(&value) {
-                            headers.insert(http::header::AUTHORIZATION, header_value);
                         }
                     }
                 }

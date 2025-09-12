@@ -1,5 +1,4 @@
 use super::computer_use_action::ComputerUseAction;
-use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ComputerUseActionResponseDto {

@@ -9,8 +9,6 @@ pub struct Configuration<C: Connect> {
     pub base_path: String,
     pub user_agent: Option<String>,
     pub client: Client<C, Full<Bytes>>,
-    pub basic_auth: Option<BasicAuth>,
-    pub oauth_access_token: Option<String>,
     pub api_key: Option<ApiKey>,
     pub headers: HeaderMap<HeaderValue>,
 }
@@ -38,8 +36,6 @@ impl<C: Connect + Clone + Send + Sync + 'static> Configuration<C> {
                 .unwrap_or_else(|_| "https://api.lybic.cn".to_owned()),
             user_agent: Some("lybic-sdk-rust".to_owned()),
             client,
-            basic_auth: None,
-            oauth_access_token: None,
             api_key: None,
             headers,
         }
