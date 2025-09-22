@@ -1,11 +1,3 @@
-#[macro_use]
-extern crate serde_derive;
+#![doc = include_str!("../README.md")]
 
-extern crate futures;
-extern crate hyper;
-extern crate serde;
-extern crate serde_json;
-extern crate url;
-
-pub mod apis;
-pub mod models;
+include!(concat!(env!("OUT_DIR"), "/bindgen.rs"));

@@ -12,10 +12,9 @@ Developing, testing, and deploying GUI-based AI agents is complex. Developers wa
 
 **Lybic** (/ˈlaɪbɪk/) provides a robust, on-demand infrastructure platform designed specifically for the AI agent development lifecycle. This SDK for Go is your command center for programmatically controlling the entire Lybic ecosystem, empowering you to build, test, and scale your agents with unprecedented speed and simplicity.
 
-
-## 🚀 Getting Started
+## Usage
 
 ```toml
 [dependencies]
-lybic-sdk-rs =  { git = "https://github.com/lybic/lybic-sdk-rs.git", branch = "0.1.0" }
+lybic-sdk-rs = "0.1.0"
 ```

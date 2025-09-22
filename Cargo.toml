@@ -2,22 +2,27 @@
 name = "lybic-sdk-rs"
 version = "0.1.0"
 edition = "2024"
-authors = ["Lybic Development Team"]
+authors = ["lybic <support@lybic.ai>"]
+description = "Lybic sdk for Rust"
+readme = "./README.md"
+homepage = "https://lybic.ai"
+repository = "https://github.com/lybic/lybic-sdk-rs"
+license = "MIT"
+keywords = ["lybic", "sdk", "agent", "gui", "agentic"]
+categories = ["agentic", "gui", "agentic-gui"]
 
 [dependencies]
-serde_derive = "^1.0"
-serde_json = "^1.0"
-url = "1.5"
-hyper = { version = "1.7.0", features = ["full"] }
-futures = "0.3"
-serde = "1.0.219"
-hyper-util = { version = "0.1.16", features = ["full"] }
-tokio = { version = "1", features = ["full"], optional = true }
-hyper-tls = "0.6"
-http-body-util = "0.1"
-http = "1.0"
-base64 = "0.22.1"
-async-trait = "0.1.81"
+chrono = { version = "0.4", features = ["serde"] }
+progenitor-client = "0.11.1"
+reqwest = { version = "0.12.23", features = ["json", "stream"] }
+serde = { version = "1", features = ["derive"] }
 
-[features]
-tokio = ["dep:tokio"]
+[build-dependencies]
+progenitor = "0.11.1"
+serde_json = "1"
+syn = "2.0"
+prettyplease = "0.2.37"
+
+[dev-dependencies]
+anyhow = "1"
+tokio = { version = "1", features = ["full"] }
