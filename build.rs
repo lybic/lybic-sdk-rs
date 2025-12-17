@@ -34,7 +34,7 @@ fn main() {
 
                 // Replace bare numbers with strings only in enum content
                 let fixed_enum = regex::Regex::new(r#"\b(\d+)\b"#)
-                    .unwrap()
+                    .expect("Failed to compile number matching regex pattern")
                     .replace_all(enum_content, r#""$1""#);
 
                 format!("{}{}{}", before, fixed_enum, after)
