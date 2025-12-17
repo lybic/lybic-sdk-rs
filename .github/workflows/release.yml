@@ -70,3 +70,10 @@ jobs:
           NEW_TAG: ${{ github.event.inputs.new_tag }}
         run: |
           gh pr create --title "build: bump lybic-sdk-version to ${NEW_TAG}" --body "build: bump lybic-sdk-version to ${NEW_TAG}" --base main --head changelog_${{ github.event.inputs.new_tag }}
+      
+      - name: Publish to crates.io
+        if: github.ref == 'refs/heads/main'
+        env:
+          CARGO_REGISTRY_TOKEN: '${{ secrets.CRATES_IO_TOKEN }}'
+        run: |
+          cargo publish

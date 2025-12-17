@@ -46,6 +46,11 @@ jobs:
             rm openapi_new.json
           fi
 
+      - name: Check openapi.json is valid
+        if: steps.compare.outputs.needs_update == 'true'
+        run: |
+          cargo check
+
       - name: Create Pull Request
         if: steps.compare.outputs.needs_update == 'true'
         run: |
