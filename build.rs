@@ -20,7 +20,8 @@ fn main() {
     println!("cargo:rerun-if-changed=../docs/openapi.json");
 
     // Read and fix OpenAPI JSON file
-    let json_content = fs::read_to_string("./docs/openapi.json").unwrap();
+    let json_content = fs::read_to_string("./docs/openapi.json")
+        .expect("Failed to read ./docs/openapi.json");
 
     // Fix cases where type is "string" but enum contains numbers
     // Use precise regex: only convert numbers in "enum" arrays that follow "type": "string"
