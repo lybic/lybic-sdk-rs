@@ -17,7 +17,7 @@ fn join(root: &str, next: &str) -> String {
 }
 
 fn main() {
-    println!("cargo:rerun-if-changed=../docs/openapi.json");
+    println!("cargo:rerun-if-changed=docs/openapi.json");
 
     // Read and fix OpenAPI JSON file
     let json_content = fs::read_to_string("./docs/openapi.json")

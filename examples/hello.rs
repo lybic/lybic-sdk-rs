@@ -15,7 +15,7 @@ async fn main() -> Result<(), anyhow::Error> {
                 max_life_seconds: Some(3600.0),
                 name: ORG_ID.to_string(),
                 project_id: None,
-                shape: "".to_string(),
+                shape: "<your-sandbox-shape>".to_string(),
             },
         )
         .await?;
