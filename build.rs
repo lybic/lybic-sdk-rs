@@ -26,7 +26,7 @@ fn main() {
     // Use precise regex: only convert numbers in "enum" arrays that follow "type": "string"
     let fixed_content =
         regex::Regex::new(r#"("type"\s*:\s*"string"[^}]*?"enum"\s*:\s*\[)([^\]]+)(\])"#)
-            .unwrap()
+            .expect("Failed to compile OpenAPI type-enum regex pattern")
             .replace_all(&json_content, |caps: &regex::Captures| {
                 let before = &caps[1];
                 let enum_content = &caps[2];
