@@ -1,6 +1,6 @@
 [package]
 name = "lybic-sdk-rs"
-version = "0.1.0"
+version = "0.1.0-beta.1"
 edition = "2024"
 authors = ["lybic <support@lybic.ai>"]
 description = "Lybic sdk for Rust"
@@ -9,19 +9,21 @@ homepage = "https://lybic.ai"
 repository = "https://github.com/lybic/lybic-sdk-rs"
 license = "MIT"
 keywords = ["lybic", "sdk", "agent", "gui", "agentic"]
-categories = ["agentic", "gui", "agentic-gui"]
+categories = ["gui"]
 
 [dependencies]
 chrono = { version = "0.4", features = ["serde"] }
 progenitor-client = "0.11.1"
 reqwest = { version = "0.12.23", features = ["json", "stream"] }
 serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 
 [build-dependencies]
 progenitor = "0.11.1"
 serde_json = "1"
 syn = "2.0"
 prettyplease = "0.2.37"
+regex = "1"
 
 [dev-dependencies]
 anyhow = "1"
