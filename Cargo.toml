@@ -9,7 +9,7 @@ homepage = "https://lybic.ai"
 repository = "https://github.com/lybic/lybic-sdk-rs"
 license = "MIT"
 keywords = ["lybic", "sdk", "agent", "gui", "agentic"]
-categories = ["agentic", "gui", "agentic-gui"]
+categories = ["gui"]
 
 [dependencies]
 chrono = { version = "0.4", features = ["serde"] }
