@@ -11,7 +11,7 @@ jobs:
     validate-version:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
             - name: Ensure tag matches server crate version
               run: python .github/scripts/check_tag.py
 
@@ -19,7 +19,7 @@ jobs:
         needs: validate-version
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
             - name: Publish crate
               env:
                   CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
