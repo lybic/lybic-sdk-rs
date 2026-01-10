@@ -3,8 +3,6 @@ name: Sync OpenAPI Spec
 
 on:
   workflow_dispatch: # Allows manual triggering
-  schedule:
-    - cron: '0 0 * * *' # Runs at 00:00 UTC every day
 
 jobs:
   sync-spec:
